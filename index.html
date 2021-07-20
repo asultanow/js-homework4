@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JS homework 4</title>
+</head>
+<body>
+<script>
+  // - створити функцію, яка генерує масив рандомних числових цілих значень в діапазоні від 0 до 100.
+
+  function generateArr(arrLen) {
+    let randomArr = [];
+
+    for (let i = 0; i < arrLen; i++) {
+      randomArr[i] = Math.round(Math.random() * 100);
+    }
+
+    return randomArr;
+  }
+
+  console.log(generateArr(20));
+
+  // - Змінти попередню функцію, щоб діапазон можна було визначити через аргументи.
+
+  function genArrInRange(arrLen, range) {
+    let randomArr = [];
+
+    for (let i = 0; i < arrLen; i++) {
+      randomArr[i] = Math.round(Math.random() * range);
+    }
+
+    return randomArr;
+  }
+
+  console.log(genArrInRange(10, 10));
+  console.log(genArrInRange(20, 50));
+  console.log(genArrInRange(30, 100));
+
+  // - створити (або згенерувати, за допомоги попередньої функції) масив рандомних цілих числових значень. Відсортувати його за допомоги sort
+
+  let arr1 = genArrInRange(20, 30);
+  arr1.sort((a, b) => a - b);
+  console.log(arr1);
+
+  let arr2 = genArrInRange(25, 80);
+  arr2.sort((a, b) => b - a);
+  console.log(arr2);
+
+  // - створити (або згенерувати, за допомоги попередньої функції) масив рандомних цілих числових значень. відфільтрувати  його за допомоги filter, за лишивши тільки парні числа
+
+  let arr3 = genArrInRange(20, 200);
+  let filteredArr = arr3.filter((elem) => {
+    return elem % 2 === 0 && elem !== 0
+  });
+  console.log(filteredArr);
+
+  // - створити масив рандомних цілих числових значень (або згенерувати, за допомоги попередньої функції) . за допомоги map та колбеку перетворити всі об'єкти в масиві на срінгові.
+
+  let arr4 = genArrInRange(25, 1000);
+  let strArr = arr4.map((elem) => {
+    return String(elem);
+  });
+  console.log(arr4);
+  console.log(strArr);
+
+  /*
+  - Створити функцію конструктор для об'єктів User з полями id, name, surname , email, phone
+  створити пустий масив, наповнити його 10 об'єктами new User(....)
+  Взяти масив цей  User[] та: Відфільтрувати , залишивши тільки об'єкти з парними id (filter) та Відсортувати його по id. по зростанню (sort)
+   */
+
+  class User {
+    constructor(id, name, surname, email, phone) {
+      this.id = id;
+      this.name = name;
+      this.surname = surname;
+      this.email = email;
+      this.phone = phone;
+    }
+  }
+
+  let users = [
+    new User(3, 'User1', 'Surname1', 'user1@gmail.com', '098-555-55-50'),
+    new User(6, 'User2', 'Surname2', 'user2@gmail.com', '098-555-55-51'),
+    new User(9, 'User3', 'Surname3', 'user3@gmail.com', '098-555-55-52'),
+    new User(1, 'User4', 'Surname4', 'user4@gmail.com', '098-555-55-53'),
+    new User(2, 'User5', 'Surname5', 'user5@gmail.com', '098-555-55-54'),
+    new User(4, 'User6', 'Surname6', 'user6@gmail.com', '098-555-55-55'),
+    new User(7, 'User7', 'Surname7', 'user7@gmail.com', '098-555-55-56'),
+    new User(10, 'User8', 'Surname8', 'user8@gmail.com', '098-555-55-57'),
+    new User(8, 'User9', 'Surname9', 'user9@gmail.com', '098-555-55-58'),
+    new User(5, 'User10', 'Surname10', 'user10@gmail.com', '098-555-55-59')
+  ];
+
+  console.log(users);
+
+  let filteredUsers = users.filter((user) => {
+    return user.id % 2 === 0;
+  });
+  filteredUsers.sort((userA, userB) => userA.id - userB.id);
+
+  console.log(filteredUsers);
+
+  /*
+  - Створити клас або функцію конструктор, за допомоги якої можна створювати об'єкти наступного вигляду.
+  Конструктор повинен приймати значення для кожної властивості, в т.ч і для властивостей внутрішніх об'єктів
+
+  {
+      id: 1,
+      name: 'Leanne Graham',
+      username: 'Bret',
+      email: 'Sincere@april.biz',
+      address: {
+          street: 'Kulas Light',
+          suite: 'Apt. 556',
+          city: 'Gwenborough',
+          zipcode: '92998-3874',
+          geo: {
+              lat: '-37.3159',
+              lng: '81.1496'
+          }
+      },
+      phone: '1-770-736-8031 x56442',
+      website: 'hildegard.org',
+      company: {
+          name: 'Romaguera-Crona',
+          catchPhrase: 'Multi-layered client-server neural-net',
+          bs: 'harness real-time e-markets'
+      }
+  }
+   */
+
+  class Person {
+    constructor(
+      id, name, username, email, street, suite, city, zipcode, lat, lng, phone, website, companyName, catchPhrase, bs
+    ) {
+      this.id = id;
+      this.name = name;
+      this.username = username;
+      this.email = email;
+      this.address = { street, suite, city, zipcode, geo: { lat, lng } };
+      this.phone = phone;
+      this.website = website;
+      this.company = { name: companyName, catchPhrase, bs };
+    }
+  }
+
+  let person = new Person(
+    1,
+    'Leanne Graham',
+    'Bret',
+    'Sincere@april.biz',
+    'Kulas Light',
+    'Apt. 556',
+    'Gwenborough',
+    '92998-3874',
+    '-37.3159',
+    '81.1496',
+    '1-770-736-8031 x56442',
+    'hildegard.org',
+    'Romaguera-Crona',
+    'Multi-layered client-server neural-net',
+    'harness real-time e-markets'
+  );
+
+  console.log(person);
+
+  /*
+  -  Створити функцію конструктор / клас  який описує об'єкт тегу
+  Поля :
+ -назва тегу ()
+ - опис його дій
+ - масив з атрибутами (2-3 атрибути максимум)
+ Кожен атрибут описати як окремий який буде містити
+ -назву атрибуту
+ -опис дії атрибуту
+ інформацію брати з htmlbook.ru
+
+ Таким чином описати теги
+ -a
+ -div
+ -h1
+ -span
+ -input
+ -form
+ -option
+ -select
+ Приклад результуючого об'єкту
+   {
+      titleOfTag: 'area',
+      action: `Каждый элемент <area> определяет активные области изображения, которые являются ссылками...`,
+      attrs: [
+        {titleOfAttr: 'accesskey', actionOfAttr: 'Переход к области с помощью комбинации клавиш'},
+        {*some props and values*},
+        {*...*},
+        {*...*},
+      ]
+
+  }
+   */
+
+  class HtmlTag {
+    constructor(name, action, attrsArr) {
+      this.name = name;
+      this.action = action;
+      this.attrs = attrsArr;
+    }
+
+  }
+
+  let aTag = new HtmlTag(
+    'a',
+    'Тег a является одним из важных элементов HTML и предназначен для создания ссылок. В зависимости от присутствия атрибутов name или href тег a устанавливает ссылку или якорь. Якорем называется закладка внутри страницы, которую можно указать в качестве цели ссылки. При использовании ссылки, которая указывает на якорь, происходит переход к закладке внутри веб-страницы.',
+    [
+      {
+        name: 'href',
+        action: 'Задает адрес документа, на который следует перейти.'
+      },
+      {
+        name: 'target',
+        action:'Имя окна или фрейма, куда браузер будет загружать документ.'
+      },
+      {
+        name: 'title',
+        action: 'Добавляет всплывающую подсказку к тексту ссылки.'
+      }
+    ]
+  );
+  console.log(aTag);
+
+  let divTag = new HtmlTag(
+    'div',
+    'Элемент div является блочным элементом и предназначен для выделения фрагмента документа с целью изменения вида содержимого. Как правило, вид блока управляется с помощью стилей. Чтобы не описывать каждый раз стиль внутри тега, можно выделить стиль во внешнюю таблицу стилей, а для тега добавить атрибут class или id с именем селектора.',
+    []
+  );
+  let h1Tag = new HtmlTag();
+  let spanTag = new HtmlTag();
+  let inputTag = new HtmlTag();
+  let formTag = new HtmlTag();
+  let optionTag = new HtmlTag();
+  let selectTag = new HtmlTag();
+
+
+</script>
+</body>
+</html>
